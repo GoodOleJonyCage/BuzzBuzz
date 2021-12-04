@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { CustomerService } from '../Services/customer.service'
+import { Customer } from '../Models/Customer.js'
 
 @Component({
   selector: 'app-product-details',
@@ -11,13 +13,17 @@ import { CustomerService } from '../Services/customer.service'
 export class ProductDetailsComponent {
 
   service: CustomerService;
+  customer: Customer;
 
-  constructor(private route: ActivatedRoute, custservice: CustomerService) {
-
-    this.route
-      .data
-      .subscribe(v => console.log(v));
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private route: ActivatedRoute, custservice: CustomerService) {
 
     this.service = custservice;
+
+    this.service.customerID.subscribe(custID => {
+      http.get<Customer>(baseUrl + 'customer/customerinfo?customerID=' + custID).subscribe(result => {
+        this.customer = result;
+      }, error => console.error(error));
+    });
   }
+   
 }

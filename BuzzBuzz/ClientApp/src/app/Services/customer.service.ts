@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class CustomerService {
 
-  public customerID: number;
-  public customerName: string;
+  public customerID = new BehaviorSubject<number>(0);
+
+  public NewCustomerID(value): void {
+    this.customerID.next(value);
+  }
 
   constructor() {
     

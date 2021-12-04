@@ -14,14 +14,11 @@
          [ngClass]="{ show: isExpanded }">
       <ul class="navbar-nav flex-grow">
         <li class="nav-item" [routerLinkActive]="['link-active']">
-          <select [(ngModel)]="selectedCustomer" class="" #s (change)="reloadCustomer({id:s.id,name:s.value})">
-            <option *ngFor="let c of customers" >
+          <select [(ngModel)]="selectedCustomer" class="" #s (change)="reloadCustomer(s.value)">
+            <option *ngFor="let c of customers" [value]="c.id" >
               {{c.name}}
             </option>
           </select>
-        </li>
-        <li>
-          {{this.service.serviceData}}
         </li>
         <!--<li (click)="this.selectRoute('/')"
             [ngClass]="selectedRoute === '/' ? 'nav-item active' : 'nav-item'"
@@ -45,13 +42,13 @@
             (click)="this.selectRoute('/customer-info')"
             [ngClass]="selectedRoute === '/customer-info' ? 'nav-item active' : 'nav-item'"
             [routerLinkActive]="['link-active']">
-          <a class="nav-link text-dark" [routerLink]="['/customer-info',{id: this.service.customerID, name: this.service.customerName }]">Customer Info</a>
+          <a class="nav-link text-dark" [routerLink]="['/customer-info']">Customer Info</a>
         </li>
         <li (click)="this.selectRoute('/product-details')"
             [ngClass]="selectedRoute === '/product-details' ? 'nav-item active' : 'nav-item'"
             [routerLinkActive]="['link-active']">
           <a class="nav-link text-dark"
-             [routerLink]="['/product-details',{id: this.service.customerID, name: this.service.customerName}]">
+             [routerLink]="['/product-details']">
             Product Details
           </a>
         </li>

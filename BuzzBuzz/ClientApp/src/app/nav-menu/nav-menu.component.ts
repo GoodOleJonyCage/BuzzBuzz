@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CustomerService } from '../Services/customer.service'
+import { Customer } from '../Models/Customer.js'
 
 @Component({
   selector: 'app-nav-menu',
@@ -19,19 +20,14 @@ export class NavMenuComponent {
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, custservice:CustomerService) {
 
     http.get<Customer[]>(baseUrl + 'customer/customers').subscribe(result => {
-      //console.log(result);
       this.customers = result;
     }, error => console.error(error));
 
     this.service = custservice;
   }
 
-  reloadCustomer(c:Customer) {
-    console.log(c);
-    console.log(this.selectedCustomer);
-    this.service.customerID = 0;
-    this.service.customerName = c.name;
-    //this.selectedCustomer = c;
+  reloadCustomer(customerid: number) {
+    this.service.NewCustomerID(customerid);
   }
 
   selectRoute(route:string) {
@@ -47,8 +43,3 @@ export class NavMenuComponent {
   }
 }
 
-
-interface Customer {
-  id : number;
-  name: string;
-}
