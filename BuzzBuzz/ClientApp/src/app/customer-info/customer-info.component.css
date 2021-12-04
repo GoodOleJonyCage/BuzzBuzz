@@ -1,4 +1,6 @@
-
+.customer-info h3 {
+  font-size:1.1em !important;
+}
 .customer-info div {
     display:flex;
     align-items:center;

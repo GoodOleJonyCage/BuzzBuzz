@@ -40,5 +40,18 @@ namespace BuzzBuzz.Controllers
 
             return vm;
         }
+
+
+        [HttpGet]
+        [Route("products")]
+        public List<Models.Product> Products(string customerID)
+        {
+            List<Models.Product> lst = new List<Models.Product>();
+            for (int i = 0; i < 100; i++)
+            {
+                lst.Add(new Models.Product() { ID = i , Name = i.ToString(), Price=(i*2)  });
+            }
+            return lst;
+        }
     }
 }

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@ag-grid-community/all-modules": "^26.2.0",
+    "@angular/material": "^13.0.3",
+    "ag-grid": "^18.1.2",
+    "ag-grid-angular": "^26.2.0",
+    "ag-grid-community": "^26.2.0"
+  }
+}

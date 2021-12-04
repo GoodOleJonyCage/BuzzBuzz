@@ -1,18 +1,42 @@
-<div class="customer-info">
-  <div>
-    <h3>
-      ID
-    </h3>
-    <h3>
-      {{customer.id}}
-    </h3>
+<!--<ag-grid-angular style="width: 620px; height: 300px;"
+                 class="ag-theme-balham-dark"
+                 [rowData]="rowData"
+                 [columnDefs]="columnDefs">
+</ag-grid-angular>-->
+<div *ngIf="customers.length >0">
+  <div class="products">
+    <div class="header">
+      <span>
+        ID
+      </span>
+      <span>
+        Name
+      </span>
+      <span>
+        Price
+      </span>
+      <span>
+      </span>
+    </div>
+    <div *ngFor="let c of customers ;let i = index"
+         class="innerdiv" [hidden]="i < min || i > max">
+      <span>
+        {{c.id}}
+      </span>
+      <span>
+        {{c.name}}
+      </span>
+      <span>
+        {{c.price}}
+      </span>
+      <span>
+        <button>Delete</button>
+      </span>
+    </div>
   </div>
-  <div>
-    <h3>
-      Name
-    </h3>
-    <h3>
-      {{customer.name}}
-    </h3>
+  <div class="pager">
+    <button (click)="MovePrev()">Prev</button>
+    <div> {{min}} to {{max}} of 100</div>
+    <button (click)="MoveNext()">Next</button>
   </div>
 </div>

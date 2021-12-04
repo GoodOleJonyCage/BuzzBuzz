@@ -32,7 +32,9 @@
     "rxjs": "^6.6.3",
     "ts-node": "~8.4.1",
     "tslint": "~5.20.0",
-    "zone.js": "0.9.1"
+    "zone.js": "0.9.1",
+    "ag-grid-angular”": "^19.1.2",
+    "ag-grid-community”": "^19.1.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.29",
