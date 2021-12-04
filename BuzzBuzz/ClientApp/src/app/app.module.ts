@@ -12,6 +12,9 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BodyComponent } from './body/body.component';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { CustomerService } from './Services/customer.service'
+
+
 
 @NgModule({
   declarations: [
@@ -33,10 +36,10 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'customer-info', component: CustomerInfoComponent },
-      { path: 'product-details', component: ProductDetailsComponent },
+      { path: 'product-details', component: ProductDetailsComponent }, //, data: { some_data: service.serviceData }
     ])
   ],
-  providers: [],
+  providers: [CustomerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
