@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+  <div class="container">
+    <!--<a class="navbar-brand" [routerLink]="['/']">BuzzBuzz</a>-->
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target=".navbar-collapse"
+            aria-label="Toggle navigation"
+            [attr.aria-expanded]="isExpanded"
+            (click)="toggle()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
+         [ngClass]="{ show: isExpanded }">
+      <ul class="navbar-nav flex-grow">
+        <li class="nav-item" [routerLinkActive]="['link-active']">
+          <select class="">
+            <option *ngFor="let c of customers">
+              {{c.name}}
+            </option>
+          </select>
+        </li>
+        <li (click)="this.selectRoute('/')"
+            [ngClass]="selectedRoute === '/' ? 'nav-item active' : 'nav-item'"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+        </li>
+        <li
+            [ngClass]="selectedRoute === '/counter' ? 'nav-item active' : 'nav-item'"
+            (click)="this.selectRoute('/counter')"
+            [routerLinkActive]="['link-active']">
+          <a class="nav-link text-dark" [routerLink]="['/counter']">Counter</a>
+        </li>
+        <li
+            (click)="this.selectRoute('/fetch-data')"
+            [ngClass]="selectedRoute === '/fetch-data' ? 'nav-item active' : 'nav-item'"
+            [routerLinkActive]="['link-active']">
+          <a class="nav-link text-dark" [routerLink]="['/fetch-data']">Fetch data</a>
+        </li>
+        <li
+            (click)="this.selectRoute('/customer-info')"
+            [ngClass]="selectedRoute === '/customer-info' ? 'nav-item active' : 'nav-item'"
+            [routerLinkActive]="['link-active']">
+          <a class="nav-link text-dark" [routerLink]="['/customer-info']">Customer Info</a>
+        </li>
+        <li
+            (click)="this.selectRoute('/product-details')"
+            [ngClass]="selectedRoute === '/product-details' ? 'nav-item active' : 'nav-item'"
+            [routerLinkActive]="['link-active']">
+          <a class="nav-link text-dark" [routerLink]="['/product-details']">Product Details</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+

@@ -1,0 +1,46 @@
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh);
+}
+
+.nav-item select {
+  display: flex;
+  width: 300px;
+  height: 50px;
+  padding:0px 10px;
+}
+
+.navbar-nav li {
+  padding: 10px 10px;
+}
+
+  .navbar-nav li a {
+    width: 300px;
+  }
+
+  .navbar-nav li.active a {
+    background-color: lightblue;
+    color: blue;
+    padding: 10px 20px;
+  }
