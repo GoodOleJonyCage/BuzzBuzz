@@ -4,6 +4,7 @@
     "@angular/material": "^13.0.3",
     "ag-grid": "^18.1.2",
     "ag-grid-angular": "^26.2.0",
-    "ag-grid-community": "^26.2.0"
+    "ag-grid-community": "^26.2.0",
+    "bootstrap": "^5.1.3"
   }
 }

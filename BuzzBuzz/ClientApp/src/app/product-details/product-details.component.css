@@ -1,9 +1,8 @@
-.products {
-  padding: 10px 10px;
-  height: 400px;
-  /*overflow: auto;*/
-  font-size: .7em;
-}
+  .products {
+    padding: 10px 10px;
+    height: 400px;
+    font-size: .7em;
+  }
 
   .products .header {
     background-color: lightblue;
@@ -25,21 +24,22 @@
     padding: 10px 10px;
   }
 
-    .products div span {
+  .products div span {
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
+  }
 
-.pager{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
+  .pager{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+  }
 
-.show {
-  display: block !important;
-}
-.hide{
-    display:none !important;
-}
+  .products-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0px 15px;
+  }
+

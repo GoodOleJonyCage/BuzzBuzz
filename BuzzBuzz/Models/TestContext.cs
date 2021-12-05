@@ -20,7 +20,7 @@ namespace BuzzBuzz.Models
         }
 
         public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<CustomerProduct> CustomerProduct { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -42,13 +42,11 @@ namespace BuzzBuzz.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Product>(entity =>
+            modelBuilder.Entity<CustomerProduct>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
-
-                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(500)

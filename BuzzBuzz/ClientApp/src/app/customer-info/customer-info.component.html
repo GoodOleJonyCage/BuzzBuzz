@@ -1,25 +1,25 @@
-<div>
-  <h4><b>Products</b>&nbsp;({{ productcount}})</h4>
-</div>
-
-<div class="customer-info" *ngIf="customer">
-  <div>
-    <h3>
-      ID
-    </h3>
-    <h3>
-      {{customer.id}}
-    </h3>
+<div *ngIf="customer">
+  <div class="customer-info-header">
+    <h4><b>Products</b>&nbsp;({{ productcount}})</h4>
   </div>
-  <div>
-    <h3>
-      Name
-    </h3>
-    <h3>
-      {{customer.name}}
-    </h3>
+  <div class="customer-info">
+    <div>
+      <h3>
+        ID
+      </h3>
+      <h3>
+        {{customer.id}}
+      </h3>
+    </div>
+    <div>
+      <h3>
+        Name
+      </h3>
+      <h3>
+        {{customer.name}}
+      </h3>
+    </div>
   </div>
 </div>
-
 
 

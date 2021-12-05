@@ -1,7 +1,15 @@
+.customer-info {
+  margin-top: 50px;
+}
 .customer-info h3 {
   font-size:1.1em !important;
 }
 .customer-info div {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+.customer-info-header{
     display:flex;
     align-items:center;
     justify-content:space-between;

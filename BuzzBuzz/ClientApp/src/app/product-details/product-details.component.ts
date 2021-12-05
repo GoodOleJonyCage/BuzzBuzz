@@ -15,6 +15,8 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 export class ProductDetailsComponent {
 
+  http: HttpClient;
+  baseUrl: string;
   min: number;
   max: number;
   service: CustomerService;
@@ -47,6 +49,20 @@ export class ProductDetailsComponent {
     }
   }
 
+  public Delete(productID: number) {
+    this.http.get<any>(this.baseUrl + 'customer/deleteproduct?productID=' + productID).subscribe(result => {
+      this.LoadProducts(this.service.customerID.value);
+    }, error => console.error(error));
+  }
+
+  public LoadProducts(custID:number) {
+
+    this.http.get<Customer[]>(this.baseUrl + 'customer/products?customerID=' + custID).subscribe(result => {
+      this.customers = result
+    }, error => console.error(error));
+
+  }
+
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private route: ActivatedRoute, custservice: CustomerService) {
 
     this.min = 0;
@@ -54,11 +70,12 @@ export class ProductDetailsComponent {
 
     this.service = custservice;
 
+    this.http = http;
+    this.baseUrl = baseUrl;
+
     //subscribe to whenever customerID changes
     this.service.customerID.subscribe(custID => {
-      http.get<Customer[]>(baseUrl + 'customer/products?customerID=' + custID).subscribe(result => {
-        this.customers = result;
-      }, error => console.error(error));
+      this.LoadProducts(custID);
     });
 
   }

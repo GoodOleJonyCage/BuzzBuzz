@@ -25,11 +25,11 @@ namespace BuzzBuzz.Controllers
             return vm;
         }
 
-        private List<Models.Product> GetProducts(string customerID)
+        private List<Models.CustomerProduct> GetProducts(string customerID)
         {
             using (BuzzBuzz.Models.TestContext context = new Models.TestContext())
             {
-                return context.Product
+                return context.CustomerProduct
                     .Where(p => p.CustomerId.Value.ToString() == customerID)
                     .ToList();
 
@@ -52,9 +52,20 @@ namespace BuzzBuzz.Controllers
 
         [HttpGet]
         [Route("products")]
-        public List<Models.Product> Products(string customerID)
+        public List<Models.CustomerProduct> Products(string customerID)
         {
             return GetProducts(customerID);
+        }
+
+        [HttpGet]
+        [Route("deleteproduct")]
+        public void DeleteProduct(string productID)
+        {
+            using (BuzzBuzz.Models.TestContext context = new Models.TestContext())
+            {
+                context.CustomerProduct.RemoveRange(context.CustomerProduct.Where(p => p.Id.ToString() == productID));
+                context.SaveChanges();
+            }
         }
     }
 }
