@@ -6,7 +6,11 @@
 <div *ngIf="customers.length > 0">
   <div class="products-header">
     <h4><b>Products</b>&nbsp;({{this.customers.length}})</h4>
-    <button>Add</button>
+    <button type="button"
+            class="btn btn-primary"
+            (click)="openPopup()">
+      Add
+    </button>
   </div>
   <div>
     <div class="products">
@@ -46,3 +50,44 @@
     </div>
   </div>
 </div>
+
+<!--modal popup-->
+<div class="modal"
+     tabindex="-1"
+     role="dialog"
+     [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add New Product</h4>
+      </div>
+      <div class="modal-body">
+        <div class="add-product-container">
+          <div>
+            <label>Name</label>
+            <input [(ngModel)]="name"  #productName type="text" class="form-control" />
+          </div>
+          <div>
+            <label>Price</label>
+            <input [(ngModel)]="price"  #productPrice type="text" class="form-control" />
+          </div>
+          <div style="text-align:center">
+            <label class="text-danger">{{errorMessage}}</label>
+          </div>
+          <div style="text-align:right">
+            <button
+                    (click)="addProduct(productName.value,productPrice.value )"
+                    class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger"
+                (click)="closePopup()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--modal popup-->

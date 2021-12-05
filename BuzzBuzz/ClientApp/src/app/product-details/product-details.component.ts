@@ -16,12 +16,15 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 export class ProductDetailsComponent {
 
   http: HttpClient;
+  errorMessage: string;
   baseUrl: string;
   min: number;
   max: number;
   service: CustomerService;
   customer: Customer;
   customers: Customer[];
+  name: string;
+  price: string;
 
  // public columnDefs: ColDef[] = [
  //   { field: 'make' },
@@ -63,7 +66,53 @@ export class ProductDetailsComponent {
 
   }
 
+  public addProduct(nameparam: string, priceparam: string) {
+    
+    this.http.post<any>(this.baseUrl + 'customer/addproduct',
+        {
+          customerid  : this.service.customerID.value,
+          name        : nameparam,
+          price       : priceparam
+        }
+      )
+      .subscribe(data => {
+       
+        if (data.error != null) {
+          this.errorMessage = data.error;
+        }
+        else {
+          this.errorMessage = '';
+       
+          this.closePopup();
+          this.LoadProducts(this.service.customerID.value);
+        }
+      }
+      ,(error) => {
+          this.errorMessage = error.error.title;
+        }
+    )
+      
+  }
+
+  //modal control
+  displayStyle = "none";
+
+  openPopup() {
+
+    this.name = '';
+    this.price = '';
+    this.errorMessage = '';
+
+    this.displayStyle = "block";
+  }
+  closePopup() {
+    this.displayStyle = "none";
+  }
+
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private route: ActivatedRoute, custservice: CustomerService) {
+
+    this.name = '';
+    this.price = '';
 
     this.min = 0;
     this.max = 5;
@@ -77,6 +126,5 @@ export class ProductDetailsComponent {
     this.service.customerID.subscribe(custID => {
       this.LoadProducts(custID);
     });
-
   }
 }

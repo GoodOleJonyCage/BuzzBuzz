@@ -67,5 +67,31 @@ namespace BuzzBuzz.Controllers
                 context.SaveChanges();
             }
         }
+
+        [HttpPost]
+        [Route("addproduct")]
+        public Models.Json AddProduct(Models.CustomerProduct product)
+        {
+            Models.Json vm = new Models.Json();
+            try
+            {
+                using (BuzzBuzz.Models.TestContext context = new Models.TestContext())
+                {
+                    context.CustomerProduct.Add(new Models.CustomerProduct()
+                    {
+                        CustomerId = product.CustomerId,
+                        Name = product.Name,
+                        Price = product.Price,
+                    });
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception exc)
+            {
+              vm.Error = exc.Message;
+            }
+            return vm;
+        }
+        
     }
 }

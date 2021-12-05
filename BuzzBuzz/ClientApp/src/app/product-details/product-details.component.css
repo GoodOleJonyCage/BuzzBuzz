@@ -43,3 +43,12 @@
       padding:0px 15px;
   }
 
+.add-product-container div {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  justify-content: center;
+}
+.add-product-container div label{
+  min-width:200px;
+}

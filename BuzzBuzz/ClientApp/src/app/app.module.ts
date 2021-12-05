@@ -12,6 +12,7 @@ import { BodyComponent } from './body/body.component';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CustomerService } from './Services/customer.service'
+
 //import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
