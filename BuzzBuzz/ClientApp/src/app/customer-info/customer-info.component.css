@@ -1,8 +1,11 @@
 .customer-info {
   margin-top: 50px;
 }
+.customer-info-container{
+    margin-top:50px;
+}
 .customer-info h3 {
-  font-size:1.1em !important;
+  font-size: 1.1em !important;
 }
 .customer-info div {
     display:flex;

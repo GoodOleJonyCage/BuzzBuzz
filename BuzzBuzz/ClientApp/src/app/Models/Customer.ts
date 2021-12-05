@@ -1,6 +1,5 @@
-
 export interface Customer {
-  id: number;
-  name: string;
-  productCount: number;
+      id: number;
+      name: string;
+      productCount: number;
 }

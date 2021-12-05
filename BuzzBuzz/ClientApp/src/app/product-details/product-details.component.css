@@ -52,3 +52,6 @@
 .add-product-container div label{
   min-width:200px;
 }
+.product-details{
+    margin-top:50px;
+}

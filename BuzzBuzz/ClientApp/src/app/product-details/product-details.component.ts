@@ -15,18 +15,8 @@ import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 export class ProductDetailsComponent {
 
-  http: HttpClient;
-  errorMessage: string;
-  baseUrl: string;
-  min: number;
-  max: number;
-  service: CustomerService;
-  customer: Customer;
-  customers: Customer[];
-  name: string;
-  price: string;
-
- // public columnDefs: ColDef[] = [
+//grid data
+// public columnDefs: ColDef[] = [
  //   { field: 'make' },
  //   { field: 'model' },
  //   { field: 'price' }
@@ -38,6 +28,23 @@ export class ProductDetailsComponent {
  //   { make: 'Porsche', model: 'Boxter', price: 72000 }
  // ];
 
+  //variables
+  http: HttpClient;
+  errorMessage: string;
+  baseUrl: string;
+  min: number; //min page number
+  max: number; //max page number
+  service: CustomerService;
+  customer: Customer;
+  customers: Customer[];
+  name: string;
+  price: string;
+  editIndex: number = -1;
+  editProdMessage: string = "";
+  editProductName: string = "";
+  //variables
+
+  //Methods
   public MovePrev() {
     if (this.min > 0) {
       this.min -= 5;
@@ -50,6 +57,39 @@ export class ProductDetailsComponent {
       this.min += 5;
       this.max += 5;
     }
+  }
+  
+  public Cancel(index: number) {
+    this.editIndex = -1;
+  }
+
+  public Edit(index: number, prodname: string) {
+    this.editIndex = index;
+    this.editProductName = prodname;
+  }
+
+  public EditProduct(id: number, nameparam:string) {
+
+    this.http.post<any>(this.baseUrl + 'customer/editproduct',
+      {
+        Id: id,
+        Name: nameparam,
+      }
+    )
+      .subscribe(data => {
+        
+        if (data.error != null) {
+          this.editProdMessage = data.error;
+        }
+        else {
+          this.editIndex = -1;
+          this.LoadProducts(this.service.customerID.value);
+        }
+      }
+        , (error) => {
+          this.errorMessage = error.error.title;
+        }
+      )
   }
 
   public Delete(productID: number) {
@@ -66,7 +106,7 @@ export class ProductDetailsComponent {
 
   }
 
-  public addProduct(nameparam: string, priceparam: string) {
+  public AddProduct(nameparam: string, priceparam: string) {
     
     this.http.post<any>(this.baseUrl + 'customer/addproduct',
         {
@@ -93,27 +133,14 @@ export class ProductDetailsComponent {
     )
       
   }
-
-  //modal control
-  displayStyle = "none";
-
-  openPopup() {
-
-    this.name = '';
-    this.price = '';
-    this.errorMessage = '';
-
-    this.displayStyle = "block";
-  }
-  closePopup() {
-    this.displayStyle = "none";
-  }
+  //Methods
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private route: ActivatedRoute, custservice: CustomerService) {
 
     this.name = '';
     this.price = '';
 
+    //initialize starting and ending page numbers
     this.min = 0;
     this.max = 5;
 
@@ -127,4 +154,19 @@ export class ProductDetailsComponent {
       this.LoadProducts(custID);
     });
   }
+
+  //modal control
+  displayStyle = "none";
+  openPopup() {
+
+    this.name = '';
+    this.price = '';
+    this.errorMessage = '';
+
+    this.displayStyle = "block";
+  }
+  closePopup() {
+    this.displayStyle = "none";
+  }
+  //modal control
 }

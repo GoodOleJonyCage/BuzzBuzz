@@ -10,11 +10,9 @@ namespace BuzzBuzz.Controllers
     [Route("[controller]")]
     public class CustomerController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
 
+        #region private methods
+        
         private List<Models.Customer> GetCustomers()
         {
             List<Models.Customer> vm = new List<Models.Customer>();
@@ -35,6 +33,8 @@ namespace BuzzBuzz.Controllers
 
             }
         }
+
+        #endregion 
 
         [HttpGet]
         [Route("customers")]
@@ -92,6 +92,27 @@ namespace BuzzBuzz.Controllers
             }
             return vm;
         }
-        
+
+        [HttpPost]
+        [Route("editproduct")]
+        public Models.Json EditProduct(Models.CustomerProduct product)
+        {
+            Models.Json vm = new Models.Json();
+            try
+            {
+                using (BuzzBuzz.Models.TestContext context = new Models.TestContext())
+                {
+                    var productToEdit = context.CustomerProduct.Where(p => p.Id == product.Id).SingleOrDefault();
+                    productToEdit.Name = product.Name;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception exc)
+            {
+                vm.Error = exc.Message;
+            }
+            return vm;
+        }
+
     }
 }
