@@ -3,40 +3,45 @@
                  [rowData]="rowData"
                  [columnDefs]="columnDefs">
 </ag-grid-angular>-->
-<div *ngIf="customers.length >0">
+
+<div>
+  <h4><b>Products</b>&nbsp;({{this.customers.length}})</h4>
+</div>
+
+<div *ngIf="customers.length > 0">
   <div class="products">
     <div class="header">
-      <span>
-        ID
-      </span>
-      <span>
-        Name
-      </span>
-      <span>
-        Price
-      </span>
-      <span>
-      </span>
+        <span>
+          ProductID
+        </span>
+        <span>
+          ProductName
+        </span>
+        <span>
+          ProductPrice
+        </span>
+        <span>
+        </span>
     </div>
-    <div *ngFor="let c of customers ;let i = index"
-         class="innerdiv" [hidden]="i < min || i > max">
-      <span>
-        {{c.id}}
-      </span>
-      <span>
-        {{c.name}}
-      </span>
-      <span>
-        {{c.price}}
-      </span>
-      <span>
-        <button>Delete</button>
-      </span>
+    <div *ngFor="let c of customers ; let i = index"
+         class="innerdiv" [hidden]="i < min || i >= max">
+        <span>
+          {{c.id}}
+        </span>
+        <span>
+          {{c.name}}
+        </span>
+        <span>
+          {{c.price}}
+        </span>
+        <span>
+          <button>Delete</button>
+        </span>
     </div>
   </div>
   <div class="pager">
-    <button (click)="MovePrev()">Prev</button>
-    <div> {{min}} to {{max}} of 100</div>
-    <button (click)="MoveNext()">Next</button>
+    <button class="button" (click)="MovePrev()">Prev</button>
+    <div><b> {{min+1}} to {{this.customers.length > 5 ? max  : this.customers.length}} of {{this.customers.length }}</b></div>
+    <button class="button" (click)="MoveNext()">Next</button>
   </div>
 </div>

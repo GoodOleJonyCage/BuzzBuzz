@@ -54,11 +54,12 @@ export class ProductDetailsComponent {
 
     this.service = custservice;
 
+    //subscribe to whenever customerID changes
     this.service.customerID.subscribe(custID => {
       http.get<Customer[]>(baseUrl + 'customer/products?customerID=' + custID).subscribe(result => {
         this.customers = result;
       }, error => console.error(error));
     });
+
   }
-   
 }

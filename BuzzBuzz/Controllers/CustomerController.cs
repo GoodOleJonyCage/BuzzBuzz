@@ -15,43 +15,46 @@ namespace BuzzBuzz.Controllers
             return View();
         }
 
+        private List<Models.Customer> GetCustomers()
+        {
+            List<Models.Customer> vm = new List<Models.Customer>();
+            using (BuzzBuzz.Models.TestContext context = new Models.TestContext())
+            {
+                vm = context.Customer.ToList();
+            }
+            return vm;
+        }
+
+        private List<Models.Product> GetProducts(string customerID)
+        {
+            using (BuzzBuzz.Models.TestContext context = new Models.TestContext())
+            {
+                return context.Product
+                    .Where(p => p.CustomerId.Value.ToString() == customerID)
+                    .ToList();
+
+            }
+        }
+
         [HttpGet]
         [Route("customers")]
         public List<Models.Customer> Customers()
         {
-            List<Models.Customer> vm = new List<Models.Customer>();
-            vm.Add(new Models.Customer() { ID = 1, Name = "Khan" });
-            vm.Add(new Models.Customer() { ID = 2, Name = "Sam" });
-
-            return vm;
+            return GetCustomers();
         }
 
         [HttpGet]
         [Route("customerinfo")]
         public Models.Customer CustomerInfo(string customerID)
         {
-            Models.Customer vm = new Models.Customer();
-
-            List<Models.Customer> lst = new List<Models.Customer>();
-            lst.Add(new Models.Customer() { ID = 1, Name = "Khan" });
-            lst.Add(new Models.Customer() { ID = 2, Name = "Sam" });
-
-            vm = lst.Where(x => x.ID == Int32.Parse(customerID)).SingleOrDefault();
-
-            return vm;
+            return GetCustomers().Where(c => c.Id.ToString() == customerID).SingleOrDefault(); 
         }
-
 
         [HttpGet]
         [Route("products")]
         public List<Models.Product> Products(string customerID)
         {
-            List<Models.Product> lst = new List<Models.Product>();
-            for (int i = 0; i < 100; i++)
-            {
-                lst.Add(new Models.Product() { ID = i , Name = i.ToString(), Price=(i*2)  });
-            }
-            return lst;
+            return GetProducts(customerID);
         }
     }
 }
